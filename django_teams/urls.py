@@ -13,7 +13,7 @@ admin.autodiscover()
 
 urlpatterns = [
     url(r'^admin/doc/', include('django.contrib.admindocs.urls')),
-    url(r'^admin/', include(admin.site.urls)),
+    url(r'^admin/', admin.site.urls),
     url(r'^teams/$', TeamListView.as_view(), name='team-list'),
     url(r'^my-teams/$', login_required(UserTeamListView.as_view()), name='user-team-list'),
     url(r'^teams/create$', login_required(TeamCreateView.as_view()), name='team-create'),

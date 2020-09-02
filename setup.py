@@ -23,10 +23,10 @@ def read_requirements(fname):
 
 setup(
     zip_safe=False,
-    name="django_teams_community",
-    version="1.4.5",
-    author="Currently Silly Inventor, formally Charles H",
-    author_email="SillyInventor@gmail.com",
+    name="djangoteams_community",
+    version="1.4.9",
+    author="Sumedh Walujkar",
+    author_email="sumedh@umich.edu",
     description="This package provides a framework for organizing groups of \
     users and restricting access in other views and models",
     keywords="",

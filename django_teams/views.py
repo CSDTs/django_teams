@@ -4,7 +4,7 @@ from django.http import HttpResponseRedirect
 from django.views.generic.list import ListView
 from django.views.generic.detail import DetailView
 from django.views.generic.edit import CreateView, UpdateView
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from django.shortcuts import get_object_or_404
 from django.db.models import Count, F
 from django_teams.models import Team, TeamStatus, Ownership
@@ -36,7 +36,7 @@ class TeamListView(ListView):
     def render_to_response(self, context, **response_kwargs):
         queryset = Team.objects.all().annotate(member_count=Count('users'))
         queryset = queryset.annotate(owner=Case(When(teamstatus__role=20, then=F('users__username')), default=None))
-        if not self.request.user.is_anonymous():
+        if not self.request.user.is_anonymous:
             queryset = queryset.annotate(role=Case(When(teamstatus__user=self.request.user,
                                          then=F('teamstatus__role')), default=0, outputfield=models.IntegerField()))
             queryset = queryset.order_by('-role', 'name')

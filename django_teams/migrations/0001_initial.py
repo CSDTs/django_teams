@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models, migrations
 from django.conf import settings
 
+import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
@@ -18,7 +19,7 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('object_id', models.PositiveIntegerField()),
-                ('content_type', models.ForeignKey(to='contenttypes.ContentType')),
+                ('content_type', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='contenttypes.ContentType')),
             ],
             options={
             },
@@ -41,8 +42,8 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('comment', models.CharField(default=b'', max_length=255)),
                 ('role', models.IntegerField(choices=[(1, b'Requesting Access'), (10, b'Team Member'), (20, b'Team Leader')])),
-                ('team', models.ForeignKey(to='django_teams.Team')),
-                ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
+                ('team', models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='django_teams.Team')),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
             ],
             options={
             },
@@ -57,7 +58,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='ownership',
             name='team',
-            field=models.ForeignKey(to='django_teams.Team'),
+            field=models.ForeignKey(on_delete=django.db.models.deletion.DO_NOTHING, to='django_teams.Team'),
             preserve_default=True,
         ),
     ]
